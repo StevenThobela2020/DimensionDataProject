@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DimensionData.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DimensionData.Controllers
 {
@@ -19,6 +20,7 @@ namespace DimensionData.Controllers
         }
 
         // GET: Employees
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             var dimensionDataContext = _context.Employee.Include(e => e.Department).Include(e => e.Education).Include(e => e.Job).Include(e => e.JobRole);
